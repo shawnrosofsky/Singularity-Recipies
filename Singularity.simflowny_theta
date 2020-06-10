@@ -1,18 +1,18 @@
 bootstrap: docker
 from: iac3/simflowny:app_2.0
 
-# %setup
-#    # make directory for test MPI program
-#    mkdir ${SINGULARITY_ROOTFS}/mpitestapp
+%setup
+   # make directory for test MPI program
+   mkdir ${SINGULARITY_ROOTFS}/mpitestapp
 #    cp example_codes/pi.c ${SINGULARITY_ROOTFS}/mpitestapp/
 
 %post
    # install development tools
    sudo apt-get update -y 
-   sudo apt-get install -y yum-utils 
-   yum update -y
-   yum groupinstall -y "Development Tools"
-   yum install -y gcc gcc-c++ wget
+#    sudo apt-get install -y yum-utils 
+#    yum update -y
+#    yum groupinstall -y "Development Tools"
+#    yum install -y gcc gcc-c++ wget
    
    # install MPICH
    MPICH_VERSION=3.3
