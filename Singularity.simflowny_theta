@@ -8,6 +8,7 @@ from: iac3/simflowny:app_2.0
 
 %post
    # install development tools
+   sudo apt-get install -y yum-utils 
    yum update -y
    yum groupinstall -y "Development Tools"
    yum install -y gcc gcc-c++ wget
