@@ -9,7 +9,7 @@ from: shawngr/test:app
 %post
    # install development tools
    apt-get update -y 
-   apt-get install wget
+   apt-get install -y wget
 #    sudo apt-get install -y yum-utils 
 #    yum update -y
 #    yum groupinstall -y "Development Tools"
