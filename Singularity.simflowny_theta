@@ -8,8 +8,8 @@ from: shawngr/test:app
 
 %post
    # install development tools
-   sudo apt-get update -y 
-   sudo apt-get install wget
+   apt-get update -y 
+   apt-get install wget
 #    sudo apt-get install -y yum-utils 
 #    yum update -y
 #    yum groupinstall -y "Development Tools"
