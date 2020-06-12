@@ -1,5 +1,5 @@
 bootstrap: docker
-from: iac3/simflowny:app_2.0
+from: shawngr/test:app
 
 %setup
    # make directory for test MPI program
