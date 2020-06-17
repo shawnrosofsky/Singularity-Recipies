@@ -6,14 +6,19 @@ from: shawngr/test:app
    mkdir ${SINGULARITY_ROOTFS}/mpitestapp
 #    cp example_codes/pi.c ${SINGULARITY_ROOTFS}/mpitestapp/
 
+%environment
+   export MPICH_DIR=/mpich/install
+   export SINGULARITY_MPICH_DIR=$MPICH_DIR
+   export SINGULARITYENV_APPEND_PATH=$MPICH_DIR/bin
+   export SINGULAIRTYENV_APPEND_LD_LIBRARY_PATH=$MPICH_DIR/lib
+   export PATH=$PATH:$MPICH_DIR/bin
+   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MPICH_DIR/lib
+
+
 %post
    # install development tools
    apt-get update -y 
    apt-get install -y wget
-#    sudo apt-get install -y yum-utils 
-#    yum update -y
-#    yum groupinstall -y "Development Tools"
-#    yum install -y gcc gcc-c++ wget
    
    # install MPICH
    MPICH_VERSION=3.3
@@ -25,11 +30,9 @@ from: shawngr/test:app
    # disable the addition of the RPATH to compiled executables
    # this allows us to override the MPI libraries to use those
    # found via LD_LIBRARY_PATH
-   ./configure --prefix=/mpich/install --disable-wrapper-rpath
+   ./configure --prefix=$MPICH_DIR --disable-wrapper-rpath
    make -j 4 install
    # add to local environment to build pi.c
-   export PATH=$PATH:/mpich/install/bin
-   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mpich/install/lib
    env | sort
 #    cd /mpitestapp
 #    mpicc -o pi -fPIC pi.c
