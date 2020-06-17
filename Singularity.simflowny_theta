@@ -24,6 +24,7 @@ from: shawngr/test:app
    MPICH_VERSION=3.3
    mkdir /mpich
    cd /mpich
+   export MPICH_DIR=/mpich/install
    wget http://www.mpich.org/static/downloads/$MPICH_VERSION/mpich-$MPICH_VERSION.tar.gz
    tar xf mpich-$MPICH_VERSION.tar.gz --strip-components=1
 
@@ -31,7 +32,7 @@ from: shawngr/test:app
    # this allows us to override the MPI libraries to use those
    # found via LD_LIBRARY_PATH
    ./configure --prefix=$MPICH_DIR --disable-wrapper-rpath
-   make -j 4 install
+   make -j 16 install
    # add to local environment to build pi.c
    env | sort
 #    cd /mpitestapp
